@@ -1,5 +1,4 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#040A1C"><title>Story of Dusk Demo 19.10</title></head><body>
-
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#040A1C"><title>Story of Dusk Demo 20.10</title></head><body>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
@@ -1637,6 +1636,7 @@ let mgKey=null,mgStep=null,mgLv=0;
 function mgOn(k){mgKey=k;mgStep=null;mgLv=0}
 function mgOff(){mgKey=null;mgStep=null;mgLv=0}
 const MGHELP={
+ map:['Each tap turns a scrap a quarter. The pinned scrap is already right: turn the others until the circles and the dotted route run on without a break.','Mỗi lần chạm xoay mảnh một góc. Mảnh có đinh ghim đã đúng: xoay các mảnh còn lại cho tới khi các vòng tròn và đường chấm nối liền, không đứt đoạn.'],
  vines:['Five vines are knotted together. A vine only slides out if no other vine lies across it, so start from the top of the pile.','Năm sợi dây leo thắt vào nhau. Sợi nào không bị sợi khác đè mới rút ra được, nên hãy bắt đầu từ sợi nằm trên cùng.'],
  ignite:['Pour oil along the star grooves in one stroke through all eight candles. Then pick up a match, strike it on the matchbox and touch it to the first candle.','Rót dầu theo rãnh hình sao một nét liền qua đủ tám ngọn nến. Rồi nhặt que diêm, quẹt vào hộp diêm và châm vào ngọn nến đầu tiên.'],
  roots:['Tap a stone to turn it a quarter. Light flows up from the bottom along joined roots. Bring it to all three marks at the top.','Chạm một khối đá để xoay một góc. Ánh sáng chảy từ dưới lên theo những đoạn rễ nối liền. Dẫn nó tới cả ba mốc phía trên.'],
@@ -1842,7 +1842,7 @@ function objective(){
  if(sc==='plan'&&lanternOpen()&&!has('lantern')&&!(S.f.p3||{}).lamp)return T('Win the lantern: repeat the light pattern.','Thắng chiếc đèn: thắp lại theo thứ tự.');
  if(['p1','pfood','plan'].includes(sc)&&lanternOpen()&&!has('lantern')&&!(S.f.p3||{}).lamp)return T('You need a light for the mist. Go to the lantern stall.','Bạn cần ánh sáng cho bãi sương. Tới sạp đèn lồng.');
  if(['p1','pfood','plan','p2'].includes(sc)||(sc==='p3'&&!has('shovel')&&!p2.shovel)){
-  if(!has('map')&&!p2.shovel){if(n<4)return T('Collect 4 map scraps ('+n+'/4), in any order: the notice board, the trader, the dying raider.','Gom đủ 4 mảnh bản đồ ('+n+'/4), thứ tự nào cũng được: bảng tin, lái buôn, gã hấp hối.');return T('Fit the 4 scraps together: double-tap a scrap in your bag.','Ghép 4 mảnh lại: chạm nhanh 2 lần vào một mảnh trong túi.')}
+  if(!has('map')&&!p2.shovel){if(n<4)return T('Collect 4 map scraps ('+n+'/4), in any order: the notice board, the trader, the dying raider.','Gom đủ 4 mảnh bản đồ ('+n+'/4), thứ tự nào cũng được: bảng tin, lái buôn, gã hấp hối.');return T('Fit the 4 scraps together: turn each scrap until the map lines up (double-tap a scrap in your bag to open it).','Ghép 4 mảnh lại: xoay từng mảnh cho tới khi bản đồ khớp (chạm nhanh 2 lần vào một mảnh trong túi để mở).')}
   if(!p2.shovel)return T('Show the whole map to the Captain.','Mang bản đồ hoàn chỉnh cho Thuyền trưởng xem.');
   return T('Board a boat at the end of the dock.','Lên thuyền ở cuối cầu tàu.')}
  if(sc==='pboard'){const f=S.f.pboard||{};if(f.map&&!f.paper)return T('Take a blank notice from the stack.','Lấy một tờ cáo thị trắng trong xấp.');if(f.map)return T('Back to the harbour.','Quay lại bến cảng.');return T('Unpin the notices from the top down. A notice still pinned under another one tears.','Gỡ cáo thị từ tờ trên cùng xuống. Tờ còn bị đè mà giật là rách.')}
@@ -1875,6 +1875,7 @@ let hintK=null,hintL=0;
 function hintSet(){const f=S.f.c23in||{},c22=S.f.c22||{};
  if(f.back&&!f.hat)return {k:'hat',l:[T('Something was left on Micho\'s desk.','Có thứ gì đó nằm lại trên bàn học của Micho.'),T('A straw hat, where the keepsakes were.','Một chiếc nón rơm, chỗ ba kỷ vật từng nằm.'),T('Take the rotten straw hat from the desk.','Lấy chiếc nón rơm mục trên bàn.')]};
  if(f.hat)return {k:'jetty',l:[T('Tonight you ferry your first soul.','Đêm nay bạn chở hồn đầu tiên.'),T('The ferry waits at the jetty.','Con đò đợi ở bến.'),T('Take the way out at the bottom.','Đi lối ra phía dưới.')]};
+ if(f.full&&!f.back)return {k:'big',l:[T('Something rose out of the dust on Micho\'s desk.','Có thứ gì vừa nhô lên khỏi lớp bụi trên bàn học của Micho.'),T('A large Spirit Shell: the last memory.','Một Vỏ linh hồn lớn: ký ức cuối cùng.'),T('Touch the large Spirit Shell above the desk.','Chạm vào Vỏ linh hồn lớn phía trên bàn học.')]};
  if(!f.mA)return {k:'enterA',l:[T('Something on the bookshelf glows like a watching eye.','Có thứ gì trên kệ sách sáng lên như một con mắt đang nhìn.'),T('A Spirit Shell holds the memory of where it lies.','Vỏ linh hồn giữ ký ức của nơi nó nằm.'),T('Touch the Spirit Shell on the bookshelf.','Chạm Vỏ linh hồn trên kệ sách.')]};
  if(!f.shelf)return {k:'shelf',l:[T('In the memory, Mop hid something for his brother.','Trong ký ức, Mop cất gì đó cho em.'),T('The hiding place is still there, a thousand years on.','Nơi cất vẫn còn đó, nghìn năm sau.'),T('Touch the glowing gap behind the bookshelf.','Chạm khe sáng sau kệ sách.')]};
  if(!f.mB)return {k:'enterB',l:[T('A second shell has opened its eyes.','Chiếc vỏ thứ hai vừa mở mắt.'),T('Look at the window.','Nhìn về phía cửa sổ.'),T('Touch the Spirit Shell on the window sill.','Chạm Vỏ linh hồn trên bậu cửa sổ.')]};
@@ -2214,19 +2215,19 @@ SC.pboard={
    f.rm[n.k]=1;sfx('tap');if(n.note)note(n.note);render();say([[L(n.t),L(n.b)]])}
  }
 };
-function openMapPuzzle(){
-  const rot=[0,1,2,3];const tiles=[[0,0],[1,0],[0,1],[1,1]];
+function openMapPuzzle(){mgOn('map');
+  const rot=[0,1,2,3],deg=[0,90,180,270];const tiles=[[0,0],[1,0],[0,1],[1,1]];
   const full=routeMapSVG().replace('<svg viewBox="0 0 200 200"','<svg viewBox="VB"');
   let g='';tiles.forEach((t,i)=>{g+='<button class="mtile'+(i===0?' fixed':'')+'" data-i="'+i+'" aria-label="'+T('Map scrap','Mảnh bản đồ')+'" style="transform:rotate('+rot[i]*90+'deg)">'+full.replace('VB',(t[0]*100)+' '+(t[1]*100)+' 100 100')+'</button>'});
-  modal('<div class="board" style="padding-top:36px"><div class="eyebrow">'+T('Four scraps of map','Bốn mảnh bản đồ')+'</div><div class="mapgrid auto" id="mg">'+g+'</div><p id="mgcap">'+T('You lay the four scraps side by side. The torn edges find each other…','Bạn đặt bốn mảnh cạnh nhau. Các mép rách tự tìm thấy nhau…')+'</p><div class="row"><button class="btn primary" id="mgok" hidden>'+T('Take the map to the Captain','Mang bản đồ cho Thuyền trưởng')+'</button></div></div>',p=>{
+  modal('<div class="board" style="padding-top:36px"><div class="eyebrow">'+T('Four scraps of map','Bốn mảnh bản đồ')+'</div><div class="mapgrid" id="mg">'+g+'</div><p id="mgcap">'+T('Four scraps, but they are turned the wrong way. The pinned one stays put. <em>Tap the other scraps to turn them</em> until the lake rings and the dotted route line up.','Đủ bốn mảnh, nhưng đang xoay lệch. Mảnh có đinh ghim giữ nguyên. <em>Chạm các mảnh còn lại để xoay</em> cho tới khi vòng hồ và đường chấm nối liền.')+'</p><div class="row"><button class="btn primary" id="mgok" hidden>'+T('Take the map to the Captain','Mang bản đồ cho Thuyền trưởng')+'</button></div></div>',p=>{
     let fin=false;
     const finish=()=>{if(fin)return;fin=true;const mg=$('mg');if(mg)mg.classList.add('solved');sfx('ok');
       SCRAPS.forEach(drop);lastTap=null;give('map',true);note('mapdone');save();
       const c=p.querySelector('#mgcap');if(c)c.innerHTML=T('The scraps fit. A dotted route winds past four lotus markers to the islet. <em>The Captain is waiting on the dock.</em>','Các mảnh khớp nhau. Một đường chấm uốn qua bốn cột mốc hoa sen tới hòn đảo. <em>Thuyền trưởng đang đợi trên cầu tàu.</em>');
       const b=p.querySelector('#mgok');if(b){b.hidden=false;b.onclick=()=>{closeModal();say(S.scene==='p2'?T('The map is whole. <em>Show it to the Captain, standing in the middle of the dock.</em>','Bản đồ đã liền. <em>Đưa cho Thuyền trưởng, người đứng giữa cầu tàu.</em>'):T('The map is whole. <em>The Captain is at the harbour: show it to him.</em>','Bản đồ đã liền. <em>Thuyền trưởng ở bến cảng: mang cho ông ấy xem.</em>'))}}};
-    const turn=i=>{if(rot[i]===0)return;rot[i]=0;const b=p.querySelector('.mtile[data-i="'+i+'"]');if(b){b.style.transform='rotate(0deg)';b.classList.add('snap')}sfx('tick');if(rot.every(r=>r===0))setTimeout(finish,500)};
+    const turn=i=>{if(fin)return;rot[i]=(rot[i]+1)%4;deg[i]+=90;const b=p.querySelector('.mtile[data-i="'+i+'"]');if(b){b.style.transform='rotate('+deg[i]+'deg)';b.classList.toggle('snap',rot[i]===0);b.classList.remove('hintv')}sfx('tick');if(rot.every(r=>r===0))setTimeout(finish,500)};
+    mgStep=()=>{const i=rot.findIndex(r=>r!==0);if(i<0)return '';const b=p.querySelector('.mtile[data-i="'+i+'"]');if(b)b.classList.add('hintv');return T('Keep turning the glowing scrap until its rings join the pinned one.','Tiếp tục xoay mảnh đang sáng cho tới khi vòng hồ nối với mảnh có đinh ghim.')};
     p.querySelectorAll('.mtile:not(.fixed)').forEach(b=>b.onclick=()=>turn(+b.dataset.i));
-    [1,2,3].forEach((i,k)=>setTimeout(()=>{if($('ovModal').classList.contains('on')&&$('mg'))turn(i)},800+k*700));
   });
 }
 const PETAL=(n,col)=>{let s='<svg viewBox="-13 -15 26 22">';const c=col||'#FFC4E8';for(let i=0;i<n;i++){const a=n===1?0:-36+i*72/(n-1);s+='<ellipse cx="0" cy="-6" rx="3.4" ry="7" fill="'+c+'" stroke="#7a2a5a" stroke-width=".8" transform="rotate('+a+')"/>'}return s+'<path d="M-8 2h16" stroke="#5FD9B8" stroke-width="1.6" stroke-linecap="round"/></svg>'};
@@ -2946,8 +2947,7 @@ SC.c31={
   Ls.push({x:31,y:24,w:15,h:26,shape:'r',label:T('Star charts on the wall','Bản đồ sao trên tường'),act:()=>skyStrip()});
   Ls.push({x:47.5,y:24,w:7,h:20,shape:'r',label:T('Pinned sketches','Bản phác thảo'),act:()=>say(T('Micho\'s drawings: a boat sailing up into the sky, with two little figures in it.','Tranh Micho vẽ: một con thuyền đang chèo lên trời, trên đó có hai bóng nhỏ.'))});
   Ls.push({x:61,y:23,w:16,h:28,label:T('Round window','Cửa sổ tròn'),act:()=>say(T('The forest outside, and the first stars coming out over it.','Khu rừng bên ngoài, và những vì sao đầu tiên đang ló ra phía trên.'))});
-  Ls.push({x:86,y:30,w:14,h:40,shape:'r',label:T('Mop\'s shelf','Kệ sách của Mop'),act:()=>say(T('Your books: knots, boats, tides. Not a single star in any of them.','Sách của bạn: nút dây, thuyền bè, thủy triều. Chẳng có lấy một ngôi sao.'))});
-  Ls.push({x:82,y:57,w:13,h:9,label:T('Desk with scrolls','Bàn và cuộn giấy'),act:()=>say(T('Micho\'s sums: how many days until the next black sun. He has circled one number in red ink, then covered it with his paw.','Bài tính của Micho: còn bao nhiêu ngày nữa tới lần mặt trời đen tiếp theo. Em khoanh một con số bằng mực đỏ, rồi lấy tay che đi.'))});
+  Ls.push({x:85.5,y:40,w:21,h:70,shape:'r',label:T('Micho\'s desk','Bàn học của Micho'),act:()=>say([T('Micho\'s desk. His sums are spread across it: how many days until the next black sun. He has circled one number in red ink, then covered it with his paw.','Bàn học của Micho. Bài tính của em bày khắp mặt bàn: còn bao nhiêu ngày nữa tới lần mặt trời đen tiếp theo. Em khoanh một con số bằng mực đỏ, rồi lấy tay che đi.'),T('On the shelf above the desk, your own books: knots, boats, tides. Not a single star in any of them.','Trên kệ phía trên bàn học là sách của bạn: nút dây, thuyền bè, thủy triều. Chẳng có lấy một ngôi sao.')])});
   Ls.push({x:27,y:62,w:9,h:12,label:T('Nightstand','Tủ đầu giường'),act:()=>say(T('A stack of star books, and a page of Micho\'s sums weighed down with one of them. He was working in bed again.','Một chồng sách sao, và một trang bài tính của Micho bị đè dưới một cuốn. Em lại nằm làm bài trên giường.'))});
   Ls.push({x:13.5,y:50,w:6,h:9,label:T('Gap behind the shelf','Khe sau kệ sách'),kind:f.given?'use':'look',use:{chart:()=>hideChart()},act:()=>{if(f.given&&has('chart')){hideChart();return}say(T('A narrow gap between the shelf and the wall. Micho keeps his secrets in there.','Một cái khe hẹp giữa kệ sách và bức tường. Micho hay giấu bí mật trong đó.'))}});
   return Ls}
@@ -3021,7 +3021,7 @@ SC.c33={
   Ls.push({x:37.5,y:52,w:7,h:7,label:T('Folded note','Mảnh giấy gấp'),kind:f.read?'look':'take',act:()=>{note('note33');if(!f.read)give('mnote',true);f.read=1;modal('<div class="board" style="padding-top:36px"><div class="eyebrow">'+T('On the pillow','Trên gối')+'</div><div class="note"><p>'+T('Mop,','Anh Mop,')+'</p><p>'+T('Don\'t be sad for too long. I worked it out. I can come back.','Anh đừng buồn lâu quá nhé. Em tính ra rồi. Em có thể quay về.')+'</p><p>'+T('<b>Two years from today, on the first day of winter</b>, I\'ll visit. Wait for me in the yard.','<b>Hai năm nữa tính từ hôm nay, vào ngày đầu tiên của mùa đông</b>, em sẽ về thăm. Đợi em ngoài sân nhé.')+'</p><p>'+T('Look up!','Nhìn lên trời nhé!')+'</p><p class="sig">'+T('Micho','Micho')+'</p></div><p>'+T('<em>Two years. The calendar on the wall still shows this autumn.</em>','<em>Hai năm. Tờ lịch trên tường vẫn dừng ở mùa thu này.</em>')+'</p></div>')}});
   Ls.push({x:32.4,y:28.5,w:6.6,h:17,shape:'r',beacon:!!f.read&&!f.found,label:T('Wall calendar','Lịch treo tường'),kind:f.found?'look':'use',use:{mnote:()=>openCal()},act:()=>openCal()});
   Ls.push({x:62,y:28,w:15,h:28,label:T('Round window','Cửa sổ tròn'),act:()=>say(T('Grey-blue morning light. No lanterns. Nobody turned them on.','Ánh sáng ban mai xanh xám. Không đèn lồng. Không ai thắp chúng.'))});
-  Ls.push({x:85,y:30,w:18,h:44,label:T('Books on the shelf','Sách trên kệ'),act:()=>say(T('Stacked neatly. Micho never stacked anything neatly in his life.','Xếp chồng ngay ngắn. Cả đời Micho chưa từng xếp thứ gì ngay ngắn.'))});
+  Ls.push({x:85.5,y:40,w:21,h:70,shape:'r',label:T('Micho\'s desk','Bàn học của Micho'),act:()=>say(T('Micho\'s desk, cleared. Even the books on the shelf above it are stacked neatly. Micho never stacked anything neatly in his life.','Bàn học của Micho, đã dọn sạch. Cả chồng sách trên kệ phía trên cũng xếp ngay ngắn. Cả đời Micho chưa từng xếp thứ gì ngay ngắn.'))});
   Ls.push({x:54,y:63,w:30,h:20,label:T('The bed','Chiếc giường'),act:()=>say(T('Someone tucked the corners in very tight.','Ai đó đã gấp góc chăn rất chặt.'))});
 
   return Ls}
@@ -3184,6 +3184,7 @@ SC.c23in={
   Ls.push({x:55,y:62,w:30,h:20,label:T('The bed','Chiếc giường'),act:()=>say(T('The quilt is black with water. Under the mud you can still see patches sewn with little stars.','Tấm chăn đen sũng nước. Dưới lớp bùn vẫn thấy những miếng vá khâu hình ngôi sao nhỏ.'))});
   Ls.push({x:61,y:28,w:16,h:30,label:T('Broken round window','Cửa sổ tròn vỡ'),act:()=>say(T('The glass is broken. Through it: the swamp, where a garden used to be.','Kính đã vỡ. Nhìn qua đó: đầm lầy, nơi từng là một khu vườn.'))});
   Ls.push({x:72.6,y:30,w:4,h:13,shape:'r',label:T('Mouldy calendar','Lịch mục'),act:()=>say(T('A calendar, mouldy through. Not a single page can be read now.','Một tờ lịch mục nát. Giờ không đọc được trang nào nữa.'))});
+  if(f.full&&!f.back)Ls.push({x:84.5,y:40,w:8,h:13,label:T('Large Spirit Shell','Vỏ linh hồn lớn'),kind:'go',beacon:true,act:()=>{lastTap={px:.845*stage.clientWidth,py:.4*stage.clientHeight};enterBig()}});
   Ls.push({x:85.5,y:40,w:21,h:70,shape:'r',label:T('Micho\'s desk','Bàn học của Micho'),kind:f.full?'look':'use',use:{chart_old:()=>placeDesk('chart'),lens:()=>placeDesk('lens'),note_old:()=>placeDesk('note')},act:()=>{if(f.full){say(T('Three clean shapes in the dust, and a warmth that has not quite gone.','Ba vết sạch trên lớp bụi, và một hơi ấm chưa tan hẳn.'));return}openDesk()}});
   Ls.push({x:84.8,y:51.5,w:11,h:10.5,shape:'r',label:f.chest?T('Open chest','Hòm đã mở'):T('Chest with three rings','Hòm có ba vòng xoay'),kind:f.chest?'look':'use',act:()=>{if(f.chest){say(T('Empty. It only ever held one thing.','Trống không. Nó chỉ từng giữ một thứ.'));return}openChest()}});
   Ls.push({x:85,y:82,w:14,h:16,label:T('Overturned chair','Chiếc ghế đổ'),act:()=>say(T('A small chair, the right height for a child at that desk.','Một chiếc ghế nhỏ, vừa tầm một đứa trẻ ngồi bên chiếc bàn ấy.'))});
@@ -3204,7 +3205,8 @@ function placeDesk(k){const f=F('c23in');f.desk=f.desk||{};const sl=DESKSLOTS.fi
   const n=Object.keys(f.desk).length;
   if(n<3){toast(T('Warm colour seeps out around it. '+n+'/3','Màu ấm loang ra quanh nó. '+n+'/3'));if($('ovModal').classList.contains('on'))openDesk();return}
   f.full=1;done('c23in');if($('ovModal').classList.contains('on'))closeModal();flare();render();
-  say([T('The last keepsake settles into the dust. Warm colour seeps out of all three, like ink in water.','Kỷ vật cuối cùng nằm vào vết bụi. Màu ấm loang ra từ cả ba, như mực thấm vào nước.'),T('Between them, a large Spirit Shell rises out of the dust. Its eyes blaze.','Giữa chúng, một Vỏ linh hồn lớn nhô lên khỏi lớp bụi. Đôi mắt nó rực sáng.')],()=>{memFx(true,[84.5,42]);sfx('hum');setTimeout(()=>{S.stash=S.inv.slice();S.inv=[];S.sel=null;S.mem='big';delete S.f.c34;delete S.f.c35;goTo('c34',{card:true})},380)})}
+  say([T('The last keepsake settles into the dust. Warm colour seeps out of all three, like ink in water.','Kỷ vật cuối cùng nằm vào vết bụi. Màu ấm loang ra từ cả ba, như mực thấm vào nước.'),T('Between them, a large Spirit Shell rises out of the dust. Its eyes blaze.','Giữa chúng, một Vỏ linh hồn lớn nhô lên khỏi lớp bụi. Đôi mắt nó rực sáng.')],()=>enterBig())}
+function enterBig(){if(S.mem)return;memFx(true,[84.5,42]);sfx('hum');setTimeout(()=>{S.stash=S.inv.slice();S.inv=[];S.sel=null;S.mem='big';if(!S.done.c34)delete S.f.c34;if(!S.done.c35)delete S.f.c35;goTo(S.done.c34&&!S.done.c35?'c35':'c34',{card:true})},380)}
 function openDesk(){const f=F('c23in');f.desk=f.desk||{};const D=f.desk;
   let h='<div class="board" style="padding-top:36px"><div class="eyebrow">'+T('Micho\'s desk','Bàn học của Micho')+'</div><div class="desk">';
   DESKSLOTS.forEach(([k,it,lab])=>{const ready=!D[k]&&has(it);h+='<div class="dcol"><button class="dslot'+(D[k]?' on':'')+(ready?' ready':'')+'" data-k="'+k+'" aria-label="'+L(lab)+'">'+(D[k]?ITEMS[it].s:OUTLINE[k])+'</button>'+deskHint(D,k,it,lab)+'</div>'});
