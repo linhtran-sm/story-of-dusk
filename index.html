@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#040A1C"><title>Story of Dusk Demo 20.10</title></head><body>
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#040A1C"><title>Story of Dusk Demo 21.10</title></head><body>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
@@ -1749,7 +1749,7 @@ let hover=null,lastPt=null,downPt=null;
 function pt(e){const r=stage.getBoundingClientRect();return {px:e.clientX-r.left,py:e.clientY-r.top,W:r.width,H:r.height}}
 function hitTest(p,touch){
   const x=p.px/p.W*100,y=p.py/p.H*100;let best=null,bestD=touch?24:0;
-  const order=SPOTS.filter(s=>!s.edge).reverse().concat(SPOTS.filter(s=>s.edge));
+  const rv=SPOTS.filter(s=>!s.edge).reverse(),order=rv.filter(s=>s.beacon).concat(rv.filter(s=>!s.beacon),SPOTS.filter(s=>s.edge));
   for(const s of order){
     const rx=s.w/2,ry=s.h/2,dx=x-s.x,dy=y-s.y;let inside,distPx;
     if(s.poly){inside=inPoly(x,y,s.poly);distPx=inside?0:polyDist(x,y,s.poly,p)}
@@ -3184,8 +3184,8 @@ SC.c23in={
   Ls.push({x:55,y:62,w:30,h:20,label:T('The bed','Chiếc giường'),act:()=>say(T('The quilt is black with water. Under the mud you can still see patches sewn with little stars.','Tấm chăn đen sũng nước. Dưới lớp bùn vẫn thấy những miếng vá khâu hình ngôi sao nhỏ.'))});
   Ls.push({x:61,y:28,w:16,h:30,label:T('Broken round window','Cửa sổ tròn vỡ'),act:()=>say(T('The glass is broken. Through it: the swamp, where a garden used to be.','Kính đã vỡ. Nhìn qua đó: đầm lầy, nơi từng là một khu vườn.'))});
   Ls.push({x:72.6,y:30,w:4,h:13,shape:'r',label:T('Mouldy calendar','Lịch mục'),act:()=>say(T('A calendar, mouldy through. Not a single page can be read now.','Một tờ lịch mục nát. Giờ không đọc được trang nào nữa.'))});
-  if(f.full&&!f.back)Ls.push({x:84.5,y:40,w:8,h:13,label:T('Large Spirit Shell','Vỏ linh hồn lớn'),kind:'go',beacon:true,act:()=>{lastTap={px:.845*stage.clientWidth,py:.4*stage.clientHeight};enterBig()}});
-  Ls.push({x:85.5,y:40,w:21,h:70,shape:'r',label:T('Micho\'s desk','Bàn học của Micho'),kind:f.full?'look':'use',use:{chart_old:()=>placeDesk('chart'),lens:()=>placeDesk('lens'),note_old:()=>placeDesk('note')},act:()=>{if(f.full){say(T('Three clean shapes in the dust, and a warmth that has not quite gone.','Ba vết sạch trên lớp bụi, và một hơi ấm chưa tan hẳn.'));return}openDesk()}});
+  if(f.full&&!f.back)Ls.push({x:84.5,y:41,w:11,h:18,label:T('Large Spirit Shell','Vỏ linh hồn lớn'),kind:'go',beacon:true,act:()=>{lastTap={px:.845*stage.clientWidth,py:.4*stage.clientHeight};enterBig()}});
+  if(!(f.full&&!f.back))Ls.push({x:85.5,y:40,w:21,h:70,shape:'r',label:T('Micho\'s desk','Bàn học của Micho'),kind:f.full?'look':'use',use:{chart_old:()=>placeDesk('chart'),lens:()=>placeDesk('lens'),note_old:()=>placeDesk('note')},act:()=>{if(f.full){say(T('Three clean shapes in the dust, and a warmth that has not quite gone.','Ba vết sạch trên lớp bụi, và một hơi ấm chưa tan hẳn.'));return}openDesk()}});
   Ls.push({x:84.8,y:51.5,w:11,h:10.5,shape:'r',label:f.chest?T('Open chest','Hòm đã mở'):T('Chest with three rings','Hòm có ba vòng xoay'),kind:f.chest?'look':'use',act:()=>{if(f.chest){say(T('Empty. It only ever held one thing.','Trống không. Nó chỉ từng giữ một thứ.'));return}openChest()}});
   Ls.push({x:85,y:82,w:14,h:16,label:T('Overturned chair','Chiếc ghế đổ'),act:()=>say(T('A small chair, the right height for a child at that desk.','Một chiếc ghế nhỏ, vừa tầm một đứa trẻ ngồi bên chiếc bàn ấy.'))});
   Ls.push({x:42,y:88,w:34,h:10,label:T('Black water','Nước đen'),act:()=>{rip([42,88]);say(T('Still and black. Lily pads float where the floor used to be.','Tĩnh lặng và đen kịt. Lá súng nổi trên chỗ từng là sàn nhà.'))}});
